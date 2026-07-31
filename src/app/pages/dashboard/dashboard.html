@@ -1,25 +1,32 @@
-<div class="grid grid-cols-1 md:grid-cols-3 gap-medium p-medium">
-  <forge-card>
-    <h3 class="text-heading3">Forge + Angular</h3>
-    <p class="text-body1 text-medium">
-      Web components wrapped with <code>&#64;tylertech/forge-angular</code>
-      give you full template type checking and form integration.
-    </p>
-  </forge-card>
+<div class="flex flex-col gap-medium p-medium">
+  <forge-inline-message theme="info">
+    <forge-icon slot="icon" name="info"></forge-icon>
+    Welcome to your Forge prototyping kit — edit these cards or ask Claude to build something new.
+  </forge-inline-message>
 
-  <forge-card>
-    <h3 class="text-heading3">Tailwind + Forge tokens</h3>
-    <p class="text-body1 text-medium">
-      Utility classes like <code>p-medium</code>, <code>gap-medium</code>, and
-      <code>text-heading3</code> map directly to Forge design tokens.
-    </p>
-  </forge-card>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-medium">
+    <forge-structured-card heading-level="3">
+      <span slot="title">Forge + Angular</span>
+      <p slot="body" class="text-body1 text-medium">
+        Web components wrapped with <code>&#64;tylertech/forge-angular</code>
+        give you full template type checking and form integration.
+      </p>
+    </forge-structured-card>
 
-  <forge-card>
-    <h3 class="text-heading3">Icons registered</h3>
-    <p class="text-body1 text-medium">
-      Icons are registered via <code>IconRegistry.define()</code> in a static initialization
-      block so they survive tree-shaking.
-    </p>
-  </forge-card>
+    <forge-structured-card heading-level="3">
+      <span slot="title">Tailwind + Forge tokens</span>
+      <p slot="body" class="text-body1 text-medium">
+        Utility classes like <code>p-medium</code>, <code>gap-medium</code>, and
+        <code>text-heading3</code> map directly to Forge design tokens.
+      </p>
+    </forge-structured-card>
+
+    <forge-structured-card heading-level="3">
+      <span slot="title">Icons registered</span>
+      <p slot="body" class="text-body1 text-medium">
+        Icons are registered via <code>IconRegistry.define()</code> in a static initialization
+        block so they survive tree-shaking.
+      </p>
+    </forge-structured-card>
+  </div>
 </div>
