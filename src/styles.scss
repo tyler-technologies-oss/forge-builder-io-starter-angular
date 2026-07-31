@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@tylertech/forge/dist/forge-core';
+@use '@tylertech/forge/dist/forge';
+@use '@tylertech/forge/sass/theme/theme-dark' as forge-theme-dark;
+
+:root[data-forge-theme='dark'] {
+  @include forge-theme-dark.theme-properties;
+}
+
+html,
+body {
+  height: 100dvh;
+  width: 100dvw;
+  margin: 0;
+}
+
+body {
+  background-color: var(--forge-theme-surface-dim, #fafafa);
+}

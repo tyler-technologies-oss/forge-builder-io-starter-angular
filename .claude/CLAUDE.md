@@ -1,55 +1,27 @@
+# Repo: Forge + Angular prototyping kit
 
-You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices.
+This repo is a **prototyping starter**. Pull it down and you get Angular + Tyler Forge pre-wired: components registered, icons ready, Tailwind mapped to Forge tokens, a standard app-layout shell, and routing scaffolded. Use it to spin up prototypes fast without re-deciding setup.
 
-## TypeScript Best Practices
+## Use the skills — don't reinvent
 
-- Use strict type checking
-- Prefer type inference when the type is obvious
-- Avoid the `any` type; use `unknown` when type is uncertain
+Two skills carry the standards for this repo. Invoke them; don't paraphrase from memory.
 
-## Angular Best Practices
+- **`angular-developer`** — Angular code and architecture (signals, forms, DI, routing, testing, CLI). Trigger whenever you're writing or reviewing Angular code.
+- **`forge:forge-design`** — Tyler Forge component usage, layout, tokens, blocks, icon lookup. Trigger whenever the task touches Forge components, `@tylertech/forge*`, or UI structure.
 
-- Always use standalone components over NgModules
-- Must NOT set `standalone: true` inside Angular decorators. It's the default in Angular v20+.
-- Use signals for state management
-- Implement lazy loading for feature routes
-- Do NOT use the `@HostBinding` and `@HostListener` decorators. Put host bindings inside the `host` object of the `@Component` or `@Directive` decorator instead
-- Use `NgOptimizedImage` for all static images.
-  - `NgOptimizedImage` does not work for inline base64 images.
+If a task touches both (most UI work here does), invoke both.
 
-## Accessibility Requirements
+## What's already set up — don't redo it
 
-- It MUST pass all AXE checks.
-- It MUST follow all WCAG AA minimums, including focus management, color contrast, and ARIA attributes.
+- App shell uses `forge-app-layout` (`src/app/app.html`) with navigation drawer, page toolbar, and footer
+- Extended components (`forge-app-layout`, `forge-user-profile`) are registered via side-effect imports in `src/app/app.ts`
+- Icon registration happens in a `static {}` block in `src/app/app.ts` — add new icons there
+- Tailwind + `@tylertech/forge-tailwind` is wired (`src/tailwind.css`, `.postcssrc.json`); utility classes like `p-medium`, `gap-medium`, `text-heading3` map to Forge tokens
+- Body/html sizing for full-viewport app layout lives in `src/styles.scss`
+- Routes are lazy-loaded standalone components under `src/app/pages/`
 
-### Components
+## When adding features
 
-- Keep components small and focused on a single responsibility
-- Use `input()` and `output()` functions instead of decorators
-- Use `computed()` for derived state
-- Set `changeDetection: ChangeDetectionStrategy.OnPush` in `@Component` decorator
-- Prefer inline templates for small components
-- Prefer Reactive forms instead of Template-driven ones
-- Do NOT use `ngClass`, use `class` bindings instead
-- Do NOT use `ngStyle`, use `style` bindings instead
-- When using external templates/styles, use paths relative to the component TS file.
-
-## State Management
-
-- Use signals for local component state
-- Use `computed()` for derived state
-- Keep state transformations pure and predictable
-- Do NOT use `mutate` on signals, use `update` or `set` instead
-
-## Templates
-
-- Keep templates simple and avoid complex logic
-- Use native control flow (`@if`, `@for`, `@switch`) instead of `*ngIf`, `*ngFor`, `*ngSwitch`
-- Use the async pipe to handle observables
-- Do not assume globals like (`new Date()`) are available.
-
-## Services
-
-- Design services around a single responsibility
-- Use the `providedIn: 'root'` option for singleton services
-- Use the `inject()` function instead of constructor injection
+- New page → new folder under `src/app/pages/<name>/`, register a lazy route in `src/app/app.routes.ts`, add a `forge-list-item` to the nav in `src/app/app.html`
+- New Forge component → check `forge:forge-design` skill first for the right block/pattern; if it's an extended component, side-effect import it in `app.ts`
+- New icon → find it via the Forge skill's icon lookup, add it to the `IconRegistry.define([...])` list in `src/app/app.ts`
