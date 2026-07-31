@@ -1,6 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ForgeCardModule, ForgeTableModule, ForgeToolbarModule } from '@tylertech/forge-angular';
+import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, computed, signal } from '@angular/core';
+import { ForgeCardModule, ForgeIconModule, ForgeTableModule, ForgeToolbarModule } from '@tylertech/forge-angular';
 import type { IColumnConfiguration } from '@tylertech/forge';
+import { IconRegistry } from '@tylertech/forge';
+import '@tylertech/forge-extended/count-card';
+import { tylIconBusiness, tylIconCalendar, tylIconDevices, tylIconGames } from '@tylertech/tyler-icons';
 
 interface VideoGame {
   rank: number;
@@ -13,9 +16,10 @@ interface VideoGame {
 
 @Component({
   selector: 'app-sample-page',
-  imports: [ForgeCardModule, ForgeTableModule, ForgeToolbarModule],
+  imports: [ForgeCardModule, ForgeIconModule, ForgeTableModule, ForgeToolbarModule],
   templateUrl: './sample-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SamplePageComponent {
   protected readonly columns: IColumnConfiguration[] = [
@@ -27,7 +31,7 @@ export class SamplePageComponent {
     { property: 'publisher', header: 'Publisher' },
   ];
 
-  protected readonly games: VideoGame[] = [
+  protected readonly games = signal<VideoGame[]>([
     { rank: 1, title: 'The Legend of Zelda: Breath of the Wild', platform: 'Switch', year: 2017, genre: 'Action-adventure', publisher: 'Nintendo' },
     { rank: 2, title: 'Super Mario Bros.', platform: 'NES', year: 1985, genre: 'Platformer', publisher: 'Nintendo' },
     { rank: 3, title: 'Tetris', platform: 'Game Boy', year: 1989, genre: 'Puzzle', publisher: 'Nintendo' },
@@ -58,5 +62,17 @@ export class SamplePageComponent {
     { rank: 28, title: 'Mass Effect 2', platform: 'Multi-platform', year: 2010, genre: 'Action RPG', publisher: 'Electronic Arts' },
     { rank: 29, title: 'BioShock', platform: 'Multi-platform', year: 2007, genre: 'FPS', publisher: '2K Games' },
     { rank: 30, title: 'Super Smash Bros. Melee', platform: 'GameCube', year: 2001, genre: 'Fighting', publisher: 'Nintendo' },
-  ];
+  ]);
+
+  protected readonly totalGames = computed(() => this.games().length);
+  protected readonly uniquePublishers = computed(() => new Set(this.games().map((g) => g.publisher)).size);
+  protected readonly uniquePlatforms = computed(() => new Set(this.games().map((g) => g.platform)).size);
+  protected readonly yearRange = computed(() => {
+    const years = this.games().map((g) => g.year);
+    return `${Math.min(...years)}–${Math.max(...years)}`;
+  });
+
+  static {
+    IconRegistry.define([tylIconBusiness, tylIconCalendar, tylIconDevices, tylIconGames]);
+  }
 }
