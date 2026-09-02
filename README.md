@@ -15,7 +15,7 @@ An Angular + Tyler Forge starter for designers and product owners. Clone, instal
 
 ## Getting started
 
-First, make a new folder for your prototype and step into it — the name is up to you (`my-login-prototype`, `dashboard-experiment`, whatever). Then clone this kit's contents *into* that folder:
+First, make a new folder for your prototype and step into it — the name is up to you (`my-login-prototype`, `dashboard-experiment`, whatever). Then clone this kit's contents _into_ that folder:
 
 ```sh
 mkdir my-prototype && cd my-prototype
@@ -37,7 +37,7 @@ claude
 Gives Claude Code deep Forge knowledge (component APIs, tokens, blocks, icons). Install once per machine:
 
 ```
-/plugin marketplace add tyler-technologies-oss/forge-mcp@blocks-mcp-adjustments
+/plugin marketplace add tyler-technologies-oss/forge-mcp
 /plugin install forge@tyler-forge
 ```
 
@@ -156,12 +156,12 @@ src/
 
 ## Commands
 
-| Command             | What it does                              |
-| ------------------- | ----------------------------------------- |
-| `npm start`         | Start dev server at `http://localhost:4200` |
-| `npm run build`     | Production build to `dist/`               |
-| `npm run watch`     | Rebuild on change (development config)    |
-| `npm test`          | Run unit tests with Vitest                |
+| Command         | What it does                                |
+| --------------- | ------------------------------------------- |
+| `npm start`     | Start dev server at `http://localhost:4200` |
+| `npm run build` | Production build to `dist/`                 |
+| `npm run watch` | Rebuild on change (development config)      |
+| `npm test`      | Run unit tests with Vitest                  |
 
 ## Styling — pick the right layer
 
