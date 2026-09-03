@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // UserPromptSubmit hook — deterministic guardrail that injects a
 // skill-invocation reminder when the user's prompt implies Angular
-// work or Forge UI work. This runs OUTSIDE the model so it can't be
-// skipped.
+// work, Forge UI work, or AI/assistant-shaped work. This runs OUTSIDE
+// the model so it can't be skipped.
 //
 // The hook only adds context; it never blocks. Worst case it's a
 // harmless nudge that Claude already planned to follow.
@@ -22,6 +22,9 @@ try {
 }
 
 const prompt = String(payload.prompt || '').toLowerCase();
+
+const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const matchesWord = (str, t) => new RegExp(`\\b${escapeRegExp(t)}\\b`).test(str);
 
 // --------------------------------------------------------------------------
 // Angular-specific triggers (technical vocabulary)
@@ -151,10 +154,34 @@ const forgeTriggers = [
 ];
 
 const isForge =
-  forgeTriggers.some((t) => prompt.includes(t)) ||
+  forgeTriggers.some((t) => matchesWord(prompt, t)) ||
   (changeVerbs.test(prompt) && /\b(page|screen|view|component|ui|layout)\b/.test(prompt));
 
-if (!isAngular && !isForge) {
+// --------------------------------------------------------------------------
+// AI / assistant-shaped triggers — Tyler ships first-party Forge AI
+// components (chat, agents, copilot UI), so point there before hand-rolling.
+// --------------------------------------------------------------------------
+const aiTriggers = [
+  'ai',
+  'a.i.',
+  'artificial intelligence',
+  'llm',
+  'chat',
+  'chatbot',
+  'assistant',
+  'copilot',
+  'co-pilot',
+  'foundry',
+  'forge-ai',
+  'forge ai',
+  'generative',
+  'gen ai',
+  'genai'
+];
+
+const isAi = aiTriggers.some((t) => matchesWord(prompt, t));
+
+if (!isAngular && !isForge && !isAi) {
   process.exit(0);
 }
 
@@ -169,6 +196,12 @@ if (isAngular) {
 if (isForge) {
   reminders.push(
     'This prompt involves Tyler Forge UI. Before picking components, laying out a page, choosing icons, or writing any `<forge-*>` markup you MUST invoke the `forge-design` skill. Trust its catalog over your recollection of component names, attributes, or icon names. In Angular templates always use the wrapper modules from `@tylertech/forge-angular`, never raw `<forge-*>` custom elements bypassing the wrappers.'
+  );
+}
+
+if (isAi) {
+  reminders.push(
+    'This prompt looks AI / assistant / agent / copilot shaped. Before hand-rolling anything, browse `@tylertech/forge-ai` (installed in `node_modules/@tylertech/forge-ai`) — Tyler ships first-party Forge AI components (chat, agents, copilot UI, etc.) and one of them likely covers this. Prefer a Forge AI component over a custom implementation.'
   );
 }
 
