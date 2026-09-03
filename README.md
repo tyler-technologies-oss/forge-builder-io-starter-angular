@@ -1,62 +1,31 @@
-# Forge Prototyping Kit — Angular
+# Forge + Angular Starter for builder.io
 
-An Angular + Tyler Forge starter for designers and product owners. Clone, install, prototype.
+An Angular + Tyler Forge starter built to run as a project template inside **[builder.io](https://www.builder.io/)**. Point a builder.io project at this repo and prototype Forge UI with Claude Code — no local plugin install required; Forge MCP connectivity is configured on the builder.io side.
 
 ## What's included
 
 - **Angular v21** with standalone components, signals, and lazy-loaded routes
 - **[@tylertech/forge](https://forge.tylertech.com/)** with the **[@tylertech/forge-angular](https://www.npmjs.com/package/@tylertech/forge-angular)** wrapper for proper template type-checking and forms integration
 - **[@tylertech/forge-extended](https://www.npmjs.com/package/@tylertech/forge-extended)** — `forge-app-layout`, `forge-user-profile`, and other higher-level pieces
+- **[@tylertech/forge-ai](https://www.npmjs.com/package/@tylertech/forge-ai)** — first-party chat/agent/copilot UI components
 - **[@tylertech/forge-tailwind](https://www.npmjs.com/package/@tylertech/forge-tailwind)** — Forge tokens as Tailwind utilities
 - **Tailwind CSS v4** and **SCSS**
 - **Light + dark theme wiring**
 - **App shell** — app bar, navigation drawer, user profile, page toolbar, footer
-- **Claude Code skills** — Angular + Forge expertise checked in under `.claude/`
+- **Claude Code skills bundled locally** — `angular-developer` and `forge-design` under `.claude/skills/`, plus a guardrail hook that nudges Claude to use them. Nothing to install; Forge component/token knowledge ships with the repo, and Forge MCP tool access comes from builder.io's configured MCP server.
 
 ## Getting started
 
-First, make a new folder for your prototype and step into it — the name is up to you (`my-login-prototype`, `dashboard-experiment`, whatever). Then clone this kit's contents _into_ that folder:
+This kit is designed to be used **through builder.io** — create (or point) a builder.io project at this repo, and builder.io handles cloning, dependency install, and connecting Claude Code to the Tyler Forge MCP server.
+
+To run it locally instead:
 
 ```sh
-mkdir my-prototype && cd my-prototype
-git clone https://github.com/tyler-technologies/forge-claude-prototyping-angular.git .
 npm install
 npm start
 ```
 
-The trailing `.` on the clone command matters — it tells git "drop the files into the current folder" instead of creating a new `forge-claude-prototyping-angular/` subfolder underneath. That way your project ends up named after your prototype (`my-prototype/`), not this template, which keeps your working directory tidy and makes the name meaningful when you're switching between prototypes later.
-
-Then open Claude Code in the project folder:
-
-```sh
-claude
-```
-
-### Install the Forge Claude plugin
-
-Gives Claude Code deep Forge knowledge (component APIs, tokens, blocks, icons). Install once per machine:
-
-```
-/plugin marketplace add tyler-technologies-oss/forge-mcp
-/plugin install forge@tyler-forge
-```
-
-If Claude doesn't seem to be using Forge knowledge after install, run `/reload-skills` or restart Claude Code.
-
-### Load the bundled Angular skills
-
-The kit ships with an Angular-specific skill under `.claude/skills/` (`angular-developer`). It's only picked up when Claude Code starts inside the cloned repo — so if you opened Claude Code **before** the clone finished, or you cloned into a directory where Claude was already running, Claude won't see it and will fall back to memory (which is how prototypes get subtly wrong).
-
-After `git clone` + `npm install`, do **one** of the following before your first prompt:
-
-- Run `/reload-skills` in the Claude Code prompt, or
-- Quit Claude Code (`Ctrl+C` twice or `/exit`) and restart it from the repo directory.
-
-You can confirm the skill loaded by running `/skills` — you should see `angular-developer` in the list.
-
-### Approve the skill-guardrails hook
-
-The kit ships with a `UserPromptSubmit` hook (`.claude/hooks/enforce-skills.mjs`) that forces Claude to load the Angular and Forge skills whenever your prompt looks UI- or code-shaped. The first time you launch Claude Code in this repo, it will ask you to approve the hook — say **yes**. Without it, Claude sometimes writes Angular or Forge code from memory and gets details wrong.
+Then open Claude Code in the project folder. The bundled skills (`angular-developer`, `forge-design`) load automatically, and `.claude/hooks/enforce-skills.mjs` will prompt for one-time approval — say **yes**, otherwise Claude will occasionally write Forge/Angular code from memory instead of from the skills. If a skill doesn't seem to be loaded, run `/skills` to check, or `/reload-skills` to force a reload.
 
 ## Talking to Claude — example prompts
 
