@@ -168,7 +168,7 @@ if (isAngular) {
 
 if (isForge) {
   reminders.push(
-    'This prompt involves Tyler Forge UI. Before picking components, laying out a page, choosing icons, or writing any `<forge-*>` markup you MUST invoke the `forge:forge-design` skill. Trust its catalog over your recollection of component names, attributes, or icon names. In Angular templates always use the wrapper modules from `@tylertech/forge-angular`, never raw `<forge-*>` custom elements bypassing the wrappers.'
+    'This prompt involves Tyler Forge UI. Before picking components, laying out a page, choosing icons, or writing any `<forge-*>` markup you MUST invoke the `forge-design` skill. Trust its catalog over your recollection of component names, attributes, or icon names. In Angular templates always use the wrapper modules from `@tylertech/forge-angular`, never raw `<forge-*>` custom elements bypassing the wrappers.'
   );
 }
 

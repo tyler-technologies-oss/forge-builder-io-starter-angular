@@ -7,7 +7,7 @@ This repo is a **prototyping starter**. Pull it down and you get Angular + Tyler
 Two skills carry the standards for this repo. Invoke them; don't paraphrase from memory.
 
 - **`angular-developer`** — Angular code and architecture (signals, forms, DI, routing, testing, CLI). Trigger whenever you're writing or reviewing Angular code.
-- **`forge:forge-design`** — Tyler Forge component usage, layout, tokens, blocks, icon lookup. Trigger whenever the task touches Forge components, `@tylertech/forge*`, or UI structure.
+- **`forge-design`** — Tyler Forge component usage, layout, tokens, blocks, icon lookup. Trigger whenever the task touches Forge components, `@tylertech/forge*`, or UI structure.
 
 If a task touches both (most UI work here does), invoke both.
 
@@ -23,5 +23,5 @@ If a task touches both (most UI work here does), invoke both.
 ## When adding features
 
 - New page → new folder under `src/app/pages/<name>/`, register a lazy route in `src/app/app.routes.ts`, add a `forge-list-item` to the nav in `src/app/app.html`
-- New Forge component → check `forge:forge-design` skill first for the right block/pattern; if it's an extended component, side-effect import it in `app.ts`
+- New Forge component → check `forge-design` skill first for the right block/pattern; if it's an extended component, side-effect import it in `app.ts`
 - New icon → find it via the Forge skill's icon lookup, add it to the `IconRegistry.define([...])` list in `src/app/app.ts`
