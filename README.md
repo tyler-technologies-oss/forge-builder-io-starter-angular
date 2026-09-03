@@ -12,7 +12,7 @@ An Angular + Tyler Forge starter built to run as a project template inside **[bu
 - **Tailwind CSS v4** and **SCSS**
 - **Light + dark theme wiring**
 - **App shell** — app bar, navigation drawer, user profile, page toolbar, footer
-- **Claude Code skills bundled locally** — `angular-developer` and `forge-design` under `.claude/skills/`, plus a guardrail hook that nudges Claude to use them. Nothing to install; Forge component/token knowledge ships with the repo, and Forge MCP tool access comes from builder.io's configured MCP server.
+- **Builder agent skills bundled locally** — `angular-developer` and `forge-design` under `.builder/skills/`, plus a guardrail hook (`.claude/hooks/`) that nudges the agent to use them. Nothing to install; Forge component/token knowledge ships with the repo, and Forge MCP tool access comes from builder.io's configured MCP server.
 
 ## Getting started
 
