@@ -25,8 +25,6 @@ npm install
 npm start
 ```
 
-Then open Claude Code in the project folder. The bundled skills (`angular-developer`, `forge-design`) load automatically, and `.claude/hooks/enforce-skills.mjs` will prompt for one-time approval — say **yes**, otherwise Claude will occasionally write Forge/Angular code from memory instead of from the skills. If a skill doesn't seem to be loaded, run `/skills` to check, or `/reload-skills` to force a reload.
-
 ## Project layout
 
 ```
